@@ -1,6 +1,6 @@
 import { SafeAreaProvider } from 'react-native-safe-area-context';
 import SafeAreaView from 'react-native-safe-area-view';
-import {Center,NativeBaseProvider,Text} from "native-base";
+import {Center,NativeBaseProvider,Text, HStack, Button} from "native-base";
 import { useDispatch, useSelector } from 'react-redux';
 import { setCounter } from '../redux/CounterSlice';
 import { selectCounter } from '../redux/CounterSlice';
@@ -15,11 +15,18 @@ const HomeScreen = () => {
     return (
         <NativeBaseProvider>
             <SafeAreaProvider>
-                <SafeAreaView style={{ flex: 1 }}>
-                    <Center style={{ flex: 1 }}>
-                        <Text>
-                        Look, I'm safe! Not under a status bar or notch or home indicator or
-                        anything! Very cool
+                <SafeAreaView flex={1}>
+                    <Center flex={1}>
+                        <HStack space={20}>
+                            <Button borderRadius={0} width={70} onPress = {() => dispatch(setCounter(counterValue + 1 ))}>
+                                <Text fontSize={40} color="white">+</Text>
+                            </Button>
+                            <Button borderRadius={0} width={70} onPress = {() => dispatch(setCounter(counterValue - 1 ))}>
+                                <Text fontSize={40} color="white">-</Text>
+                            </Button>
+                        </HStack>
+                        <Text fontSize={40} mt={20} color="black">
+                            {counterValue}
                         </Text>
                     </Center>
                 </SafeAreaView>
